@@ -24,6 +24,6 @@ if (!getApps().length) {
 }
 
 // Initialize Firebase services
-const auth = getAuth(app);
+// const auth = getAuth(app);
 const db = getFirestore(app);
-export { auth, db };
+export { db };

@@ -16,12 +16,13 @@ const UpdateData = () => {
     const data = new FormData(e.currentTarget);
     try {
       setLoading(true);
-      const resJson = await fetch("/api/jadwal", {
+      const resJson = await fetch("/api/update_by_csv", {
         method: "POST",
         body: data,
       });
-      if (resJson.status == 201) {
-        toast.success("Berhasil membuat jadwal!", {
+      console.log("resJson.status ", resJson.status);
+      if (resJson.status == 200) {
+        toast.success("Berhasil mengupdate data pohon!", {
           duration: 2500,
         });
       } else {
@@ -55,7 +56,7 @@ const UpdateData = () => {
           encType="multipart/form-data"
         >
           <div className="mb-6 flex flex-col w-full relative text-center font-bold text-xl">
-            Pembaruan data pohon
+            Pembaruan data pohon melalui file
           </div>
           <div className="mb-6 flex flex-col w-full relative">
             <label htmlFor="file" className="mb-1">
