@@ -16,7 +16,7 @@ const UpdateData = () => {
     const data = new FormData(e.currentTarget);
     try {
       setLoading(true);
-      const resJson = await fetch("/api/update_by_csv", {
+      const resJson = await fetch("/api/update_by_file", {
         method: "POST",
         body: data,
       });
@@ -30,8 +30,6 @@ const UpdateData = () => {
         throw new Error(errorMessage);
       }
       setLoading(false);
-      window.location.reload();
-      window.location.href = "/";
     } catch (error: any) {
       return toast.error(error.message, {
         duration: 5000,
@@ -60,11 +58,11 @@ const UpdateData = () => {
           </div>
           <div className="mb-6 flex flex-col w-full relative">
             <label htmlFor="file" className="mb-1">
-              Unggah dokumen (.csv)
+              Unggah dokumen (.xlsx)
             </label>
             <input
               type="file"
-              accept="application/csv"
+              accept="application/xlsx"
               className="  border-2 rounded-xl border-lime-500 focus:outline-none file:focus:ring file:transition-all  
             file:mr-4 file:py-2 file:px-4
              file:border-0
