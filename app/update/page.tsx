@@ -63,18 +63,18 @@ const UpdateData = () => {
             <input
               type="file"
               accept="application/xlsx"
-              className="  border-2 rounded-xl border-lime-500 focus:outline-none file:focus:ring file:transition-all  
+              className="  border-2 rounded-xl border-lime-950 focus:outline-none file:focus:ring file:transition-all  
             file:mr-4 file:py-2 file:px-4
              file:border-0
             file:text-sm file:font-semibold
-            file:bg-lime-500 file:text-gray-900 hover:file:bg-lime-700
+            file:bg-lime-950 file:text-lime-50 hover:ring-lime-700 hover:ring
             cursor-pointer
             "
               name="file"
               required
             />
           </div>
-          <button className=" py-2 w-full bg-lime-500 text-gray-900 hover:ring hover:ring-lime-300 rounded-lg self-start focus:outline-none focus:ring focus:ring-lime-300 focus:bg-lime-400 transition">
+          <button className=" py-2 w-full bg-lime-950 text-lime-50 hover:ring hover:ring-lime-700 rounded-lg self-start focus:outline-none focus:ring focus:ring-lime-950 focus:bg-lime-50 focus:text-lime-950 transition">
             Simpan
           </button>
         </form>
