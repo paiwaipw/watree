@@ -37,6 +37,19 @@ export const options = {
 
   responsive: true,
   maintainAspectRatio: false,
+  scales: {
+    x: {
+      ticks: {
+        font: {
+          size: 9,
+        },
+        maxRotation: 90,
+        minRotation: 0,
+        autoSkip: true,
+        maxTicksLimit: 7, // max label
+      },
+    },
+  },
 };
 export const LineChart = ({ treeData }: any) => {
   const [loading, setLoading] = useState(false);

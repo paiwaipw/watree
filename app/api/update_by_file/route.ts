@@ -9,6 +9,7 @@ import {
   query,
   where,
   getDoc,
+  orderBy,
 } from "firebase/firestore";
 import { v4 as uuidv4 } from "uuid";
 import * as XLSX from "xlsx";
@@ -139,18 +140,42 @@ export const POST = async (req: NextRequest) => {
         contentType: file.type,
       },
     });
-    // Get the public URL of the uploaded csv
-    const csvUrl = `https://storage.googleapis.com/${bucket.name}/${destination}`;
-    // Save record with csv URL in Firestore
+    // Get the public URL of the uploaded excel
+    const excelUrl = `https://storage.googleapis.com/${bucket.name}/${destination}`;
+    // Save record with excel URL in Firestore
     await setDoc(doc(db, "archive_file", xlsx_id), {
       id: xlsx_id,
-      csvUrl,
+      excelUrl,
       uploaded: new Date().toISOString(),
     });
 
     return new Response("Sukses mengupdate data pohon", { status: 200 });
   } catch (error) {
     console.error("Error processing XLSX file:", error);
+    return new Response("Internal Server Error", { status: 500 });
+  }
+};
+
+export const GET = async (req: NextRequest) => {
+  try {
+    const fileRef = collection(db, "archive_file");
+    const q = query(fileRef, orderBy("uploaded", "desc"));
+    const snapshot = await getDocs(q);
+    if (snapshot.empty) {
+      return new Response("Data tidak tersedia", { status: 404 });
+    }
+    let files = [];
+    if (snapshot.size > 2) {
+      snapshot.docs.slice(0, 3).forEach((doc) => {
+        files.push(doc.data());
+      });
+    } else {
+      files.push(snapshot.docs[0].data());
+    }
+    return new Response(JSON.stringify(files), {
+      status: 200,
+    });
+  } catch (error) {
     return new Response("Internal Server Error", { status: 500 });
   }
 };
