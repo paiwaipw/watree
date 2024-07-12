@@ -36,7 +36,7 @@ const PlotPage = ({ params }: { params: { id: string } }) => {
         <Header />
         <div
           id="main"
-          className="min-h-screen flex flex-col items-center justify-center gap-5 pt-20 pb-10"
+          className="min-h-screen flex flex-col items-center justify-center gap-5 pt-24 pb-10"
         >
           <div className="font-bold">Data for {params.id}</div>
           <div className="flex px-2 h-[36rem] w-full">

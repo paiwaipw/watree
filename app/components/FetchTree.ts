@@ -22,3 +22,18 @@ export const fetchOneTree = async (id: string) => {
     return null;
   }
 };
+export const fetchAllTrees = async () => {
+  try {
+    const treesRef = collection(db, "trees");
+    const treesSnapshot = await getDocs(treesRef);
+    if (treesSnapshot.empty) {
+      return null;
+    }
+    const trees = treesSnapshot.docs.map((tree) => {
+      return { ...tree.data() };
+    });
+    return trees;
+  } catch (error) {
+    return null;
+  }
+};

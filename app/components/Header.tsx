@@ -28,7 +28,16 @@ const Header = () => {
         isScrolled ? "py-2 text-md" : "py-5 text-lg"
       }`}
     >
-      <Link href={"/"}>WaTree</Link>
+      <Link href={"/"} className="flex flex-row items-center gap-0.5">
+        <img
+          src="/trees.svg"
+          className={`transition-all duration-300 ${
+            isScrolled ? "w-6" : "w-10"
+          }`}
+          alt=""
+        />
+        <div className="leading-10">WaTree</div>
+      </Link>
     </div>
   );
 };

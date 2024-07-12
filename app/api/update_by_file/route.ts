@@ -87,7 +87,7 @@ export const POST = async (req: NextRequest) => {
       const sheetName = workbook.SheetNames[i];
       const treeId = sheetName;
       const sheet = workbook.Sheets[sheetName];
-      const rows = XLSX.utils.sheet_to_json(sheet);
+      const rows: any = XLSX.utils.sheet_to_json(sheet);
 
       const treeDocRef = doc(treesCollection, treeId);
       const treeDoc = await getDoc(treeDocRef);
@@ -95,6 +95,12 @@ export const POST = async (req: NextRequest) => {
       let treeProgress = [];
       if (treeDoc.exists()) {
         treeProgress = treeDoc.data().progress || [];
+      }
+      const { Latitude: latitude, Longitude: longitude } = rows[0];
+      if (!latitude || !longitude) {
+        return new Response("Sesuaikan Data Latitude dan Logitude!", {
+          status: 400,
+        });
       }
 
       for (const row of rows) {
@@ -120,10 +126,9 @@ export const POST = async (req: NextRequest) => {
           );
         }
       }
-
       await setDoc(
         treeDocRef,
-        { treeId, progress: treeProgress },
+        { treeId, progress: treeProgress, latitude, longitude },
         { merge: true }
       );
     }
