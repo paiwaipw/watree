@@ -24,7 +24,7 @@ const Header = () => {
 
   return (
     <div
-      className={`flex items-center w-full bg-lime-50 shadow-md fixed top-0 left-0 right-0 px-7 font-semibold text-lime-900 transition-all duration-300 ${
+      className={`flex items-center w-full bg-lime-50/50 shadow-md fixed top-0 left-0 right-0 px-7 font-semibold text-lime-900 transition-all duration-300 backdrop-blur-md z-50 ${
         isScrolled ? "py-2 text-md" : "py-5 text-lg"
       }`}
     >

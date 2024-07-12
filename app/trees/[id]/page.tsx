@@ -36,10 +36,10 @@ const PlotPage = ({ params }: { params: { id: string } }) => {
         <Header />
         <div
           id="main"
-          className="min-h-screen flex flex-col items-center justify-center gap-5"
+          className="min-h-screen flex flex-col items-center justify-center gap-5 pt-20 pb-10"
         >
           <div className="font-bold">Data for {params.id}</div>
-          <div className="flex px-2 h-72 w-full">
+          <div className="flex px-2 h-[36rem] w-full">
             {treeData && <LineChart treeData={treeData} />}
           </div>
           <div className="flex flex-col rounded-xl py-2 px-4  bg-lime-50 shadow-md hover:shadow-xl transition-all max-w-[95%] max-sm:min-w-[80%]">
@@ -54,6 +54,15 @@ const PlotPage = ({ params }: { params: { id: string } }) => {
                   {treeData.progress[treeData.progress.length - 1].flowrate}
                 </span>{" "}
                 cm/hr
+              </span>
+            </div>
+            <div className="flex flex-row justify-start">
+              <span className="w-24 flex shrink-0">Chan </span>
+              <span className="mx-1">:</span>
+              <span className=" mx-1">
+                <span className="font-semibold">
+                  {treeData.progress[treeData.progress.length - 1].chan}
+                </span>{" "}
               </span>
             </div>
             <div className="flex flex-row justify-start">

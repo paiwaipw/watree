@@ -16,7 +16,7 @@ import * as XLSX from "xlsx";
 import { parse, isValid } from "date-fns";
 
 const validateRow = (row: any) => {
-  let { Date: date, Time: time, Flowrate: flowrate } = row;
+  let { Date: date, Time: time, Flowrate: flowrate, Chan: chan } = row;
   try {
     // Validate and parse Date
     const parsedDate = parse(date, "d/MM/yyyy", new Date());
@@ -48,7 +48,8 @@ const validateRow = (row: any) => {
     }
     return {
       timestamp: timestamp.toISOString(), // Converting to ISO string for Firestore
-      flowrate: flowrate,
+      chan: chan || null,
+      flowrate: flowrate || null,
     };
   } catch (error) {
     // console.log("NULL_4", error);

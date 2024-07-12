@@ -77,7 +77,7 @@ const UpdateData = () => {
                 return (
                   <Link
                     href={file.excelUrl}
-                    className="flex flex-row justify-between items-center gap-4 my-1 border  shadow-md rounded-md bg-lime-50 hover:ring hover:ring-lime-700 transition-all px-2 py-2 text-sm"
+                    className="flex flex-row justify-between items-center gap-4 my-1 border  shadow-md rounded-md bg-lime-50 hover:ring hover:ring-gray-300 transition-all px-2 py-2 text-sm"
                   >
                     <img
                       src="/download.svg"
@@ -98,7 +98,7 @@ const UpdateData = () => {
                     <Link href={file.excelUrl}>
                       <img
                         src="/download.svg"
-                        className="w-7 p-1.5 bg-lime-950 text-white  shadow-xl rounded-md hover:ring hover:ring-lime-700 transition-all"
+                        className="w-7 p-1.5 bg-lime-950 text-white  shadow-xl rounded-md hover:ring hover:ring-gray-300 transition-all"
                         alt=""
                       />
                     </Link>
@@ -128,14 +128,14 @@ const UpdateData = () => {
             file:mr-4 file:py-2 file:px-4
              file:border-0
             file:text-sm file:font-semibold
-            file:bg-lime-950 file:text-lime-50 hover:ring-lime-700 hover:ring
+            file:bg-lime-950 file:text-lime-50 hover:ring-gray-300 hover:ring transition-all
             cursor-pointer
             "
               name="file"
               required
             />
           </div>
-          <button className=" py-2 w-full bg-lime-950 text-lime-50 hover:ring hover:ring-lime-700 rounded-lg self-start focus:outline-none focus:ring focus:ring-lime-950 focus:bg-lime-50 focus:text-lime-950 transition">
+          <button className=" py-2 w-full bg-lime-950 text-lime-50 hover:ring hover:ring-gray-300 rounded-lg self-start focus:outline-none focus:ring focus:ring-lime-950 focus:bg-lime-50 focus:text-lime-950 transition">
             Simpan
           </button>
         </form>

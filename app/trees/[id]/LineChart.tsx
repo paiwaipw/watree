@@ -64,6 +64,14 @@ export const LineChart = ({ treeData }: any) => {
       borderWidth: 1,
       borderColor: "#8bcc00",
     },
+    {
+      backgroundColor: "#0000FF",
+      label: "Chan (MP406-VSW%)",
+      data: [],
+      pointStyle: false,
+      borderWidth: 1,
+      borderColor: "#0000FF",
+    },
   ];
 
   useEffect(() => {
@@ -77,6 +85,7 @@ export const LineChart = ({ treeData }: any) => {
     treeData.progress.forEach((tree: any) => {
       labels.push(dayjs(tree.timestamp.toString()).format("DD/MM/YYYY"));
       datasets[0].data.push(tree.flowrate);
+      datasets[1].data.push(tree.chan);
     });
   }
   const data = {
@@ -86,5 +95,5 @@ export const LineChart = ({ treeData }: any) => {
   if (loading) {
     return <Loading />;
   }
-  return <Line className="relative sm:h-72" options={options} data={data} />;
+  return <Line className="relative " options={options} data={data} />;
 };
