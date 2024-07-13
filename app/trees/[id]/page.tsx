@@ -4,7 +4,7 @@ import Footer from "@/app/components/Footer";
 import Header from "@/app/components/Header";
 import Loading from "@/app/loading";
 import React, { useEffect, useState } from "react";
-import { LineChart } from "./LineChart";
+import { FlowrateChart, SoilChart } from "./LineChart";
 import dayjs from "dayjs";
 
 const PlotPage = ({ params }: { params: { id: string } }) => {
@@ -39,8 +39,11 @@ const PlotPage = ({ params }: { params: { id: string } }) => {
           className="min-h-screen flex flex-col items-center justify-center gap-5 pt-24 pb-10"
         >
           <div className="font-bold">Data for {params.id}</div>
-          <div className="flex px-2 h-[36rem] w-full">
-            {treeData && <LineChart treeData={treeData} />}
+          <div className="flex px-2 h-[20rem] w-full">
+            {treeData && <FlowrateChart treeData={treeData} />}
+          </div>
+          <div className="flex px-2 h-[20rem] w-full">
+            {treeData && <SoilChart treeData={treeData} />}
           </div>
           <div className="flex flex-col rounded-xl py-2 px-4  bg-lime-50 shadow-md hover:shadow-xl transition-all max-w-[95%] max-sm:min-w-[80%]">
             <div className="text-center font-bold text-lime-950 py-2">

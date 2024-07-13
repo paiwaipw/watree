@@ -51,7 +51,7 @@ export const options = {
     },
   },
 };
-export const LineChart = ({ treeData }: any) => {
+export const FlowrateChart = ({ treeData }: any) => {
   const [loading, setLoading] = useState(false);
 
   let labels: any = [];
@@ -64,6 +64,36 @@ export const LineChart = ({ treeData }: any) => {
       borderWidth: 1,
       borderColor: "#8bcc00",
     },
+  ];
+
+  useEffect(() => {
+    if (treeData) {
+      setLoading(false);
+    } else {
+      setLoading(true);
+    }
+  }, [treeData]);
+  if (treeData.progress) {
+    treeData.progress.forEach((tree: any) => {
+      labels.push(dayjs(tree.timestamp.toString()).format("DD/MM/YYYY"));
+      datasets[0].data.push(tree.flowrate);
+    });
+  }
+  const data = {
+    labels,
+    datasets,
+  };
+  if (loading) {
+    return <Loading />;
+  }
+  return <Line className="relative " options={options} data={data} />;
+};
+
+export const SoilChart = ({ treeData }: any) => {
+  const [loading, setLoading] = useState(false);
+
+  let labels: any = [];
+  let datasets: any = [
     {
       backgroundColor: "#0000FF",
       label: "Chan (MP406-VSW%)",
@@ -84,8 +114,7 @@ export const LineChart = ({ treeData }: any) => {
   if (treeData.progress) {
     treeData.progress.forEach((tree: any) => {
       labels.push(dayjs(tree.timestamp.toString()).format("DD/MM/YYYY"));
-      datasets[0].data.push(tree.flowrate);
-      datasets[1].data.push(tree.chan);
+      datasets[0].data.push(tree.chan);
     });
   }
   const data = {
