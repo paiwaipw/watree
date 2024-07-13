@@ -50,6 +50,16 @@ const PlotPage = ({ params }: { params: { id: string } }) => {
               Latest Data
             </div>
             <div className="flex flex-row justify-start">
+              <span className="w-24 flex shrink-0">Latitude</span>
+              <span className="mx-1">:</span>
+              <span className=" mx-1">{treeData.latitude}</span>
+            </div>
+            <div className="flex flex-row justify-start">
+              <span className="w-24 flex shrink-0">Longitude</span>
+              <span className="mx-1">:</span>
+              <span className=" mx-1">{treeData.longitude}</span>
+            </div>
+            <div className="flex flex-row justify-start">
               <span className="w-24 flex shrink-0">Flow Rate </span>
               <span className="mx-1">:</span>
               <span className=" mx-1">
@@ -90,11 +100,7 @@ const PlotPage = ({ params }: { params: { id: string } }) => {
                 ).format("HH:mm:ss")}
               </span>
             </div>
-            <div className="flex flex-row justify-start">
-              <span className="w-24 flex shrink-0">Position</span>
-              <span className="mx-1">:</span>
-              <span className=" mx-1">-</span>
-            </div>
+
             <div className="flex flex-row justify-start">
               <span className="w-24 flex shrink-0">Additional Information</span>
               <span className="mx-1">:</span>

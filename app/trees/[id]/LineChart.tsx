@@ -96,7 +96,7 @@ export const SoilChart = ({ treeData }: any) => {
   let datasets: any = [
     {
       backgroundColor: "#0000FF",
-      label: "Chan (MP406-VSW%)",
+      label: "Soil Moisture (MP406-VSW%)",
       data: [],
       pointStyle: false,
       borderWidth: 1,

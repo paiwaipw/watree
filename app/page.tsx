@@ -54,7 +54,7 @@ const HomePage = () => {
           >
             Update Data
           </Link>
-          <div className=" w-[50rem]">
+          <div className="w-[95%] sm:w-[60%] h-[30rem] sm:h-[50rem]">
             <Mapbox trees={treesData} />
           </div>
         </div>
