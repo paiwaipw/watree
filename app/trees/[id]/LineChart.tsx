@@ -8,6 +8,8 @@ import {
   Title,
   Tooltip,
   Legend,
+  Scale,
+  Tick,
 } from "chart.js";
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
@@ -26,6 +28,26 @@ export const options = {
   plugins: {
     legend: {
       position: "top" as const,
+    },
+    tooltip: {
+      callbacks: {
+        title: function (tooltipItems: any) {
+          const tooltipItem = tooltipItems[0];
+          const date = dayjs(tooltipItem.label).format("DD/MM/YYYY");
+          const time = dayjs(tooltipItem.label).format("HH:mm UTCZ");
+          return `Date: ${date}, Time: ${time}`;
+        },
+        label: function (context: any) {
+          let label = context.dataset.label || "";
+          if (label) {
+            label += ": ";
+          }
+          if (context.parsed.y !== null) {
+            label += `${context.parsed.y}`;
+          }
+          return label;
+        },
+      },
     },
   },
   layout: {
@@ -46,7 +68,16 @@ export const options = {
         maxRotation: 90,
         minRotation: 0,
         autoSkip: true,
-        maxTicksLimit: 7, // max label
+        maxTicksLimit: 7, // max label,
+        callback: function (this: Scale, tickValue: string | number) {
+          // // Skip the first label
+          // if (index === 0) {
+          //   return "";
+          // }
+          // tickValue represents index
+          const label: any = this.chart.data.labels![Number(tickValue)];
+          return [dayjs(label).format("DD/MM/"), dayjs(label).format("YYYY")];
+        },
       },
     },
   },
@@ -75,7 +106,7 @@ export const FlowrateChart = ({ treeData }: any) => {
   }, [treeData]);
   if (treeData.progress) {
     treeData.progress.forEach((tree: any) => {
-      labels.push(dayjs(tree.timestamp.toString()).format("DD/MM/YYYY"));
+      labels.push(dayjs(tree.timestamp).format("YYYY-MM-DDTHH:mm:ssZ"));
       datasets[0].data.push(tree.flowrate);
     });
   }
@@ -113,7 +144,7 @@ export const SoilChart = ({ treeData }: any) => {
   }, [treeData]);
   if (treeData.progress) {
     treeData.progress.forEach((tree: any) => {
-      labels.push(dayjs(tree.timestamp.toString()).format("DD/MM/YYYY"));
+      labels.push(dayjs(tree.timestamp).format("YYYY-MM-DDTHH:mm:ssZ"));
       datasets[0].data.push(tree.chan);
     });
   }
