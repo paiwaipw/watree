@@ -15,13 +15,44 @@ import { v4 as uuidv4 } from "uuid";
 import * as XLSX from "xlsx";
 import { parse, isValid } from "date-fns";
 
+const excelDateToJSDate = (serial: number) => {
+  const utcDays = Math.floor(serial - 25569);
+  const utcValue = utcDays * 86400;
+  const dateInfo = new Date(utcValue * 1000);
+
+  const fractionalDay = serial - Math.floor(serial) + 0.0000001;
+
+  let totalSeconds = Math.floor(86400 * fractionalDay);
+
+  const seconds = totalSeconds % 60;
+  totalSeconds -= seconds;
+
+  const hours = Math.floor(totalSeconds / (60 * 60));
+  const minutes = Math.floor(totalSeconds / 60) % 60;
+
+  return new Date(
+    dateInfo.getFullYear(),
+    dateInfo.getMonth(),
+    dateInfo.getDate(),
+    hours,
+    minutes,
+    seconds
+  );
+};
 const validateRow = (row: any) => {
   let { Date: date, Time: time, Flowrate: flowrate, Chan: chan } = row;
   try {
     // Validate and parse Date
-    const parsedDate = parse(date, "d/MM/yyyy", new Date());
+    let parsedDate;
+    if (typeof date === "number") {
+      // Some rows in excel is formatted as Date, some as number
+      parsedDate = excelDateToJSDate(date);
+    } else {
+      parsedDate = parse(date, "d/MM/yyyy", new Date());
+    }
+    // const parsedDate = parse(date, "d/MM/yyyy", new Date());
     if (!isValid(parsedDate)) {
-      console.log("NULL_1");
+      console.log(`Invalid Date: ${date}`);
       return null;
     }
     // Handle Time value
@@ -41,7 +72,15 @@ const validateRow = (row: any) => {
     }
 
     // Combine Date and Time into a single timestamp
-    const timestamp = new Date(parsedDate.setHours(hours, minutes, seconds));
+    // const timestamp = new Date(parsedDate.setHours(hours, minutes, seconds));
+    const timestamp = new Date(
+      parsedDate.getFullYear(),
+      parsedDate.getMonth(),
+      parsedDate.getDate(),
+      hours,
+      minutes,
+      seconds
+    );
 
     if (!timestamp || !flowrate) {
       return null;
@@ -111,7 +150,6 @@ export const POST = async (req: NextRequest) => {
             const existingEntryIndex = treeProgress.findIndex(
               (entry: any) => entry.timestamp === validatedRow.timestamp
             );
-
             if (existingEntryIndex === -1) {
               // Add new entry
               treeProgress.push(validatedRow);
@@ -119,6 +157,8 @@ export const POST = async (req: NextRequest) => {
               // Update existing entry
               treeProgress[existingEntryIndex] = validatedRow;
             }
+          } else {
+            console.log(`Row validation failed in sheet ${sheetName}:`, row);
           }
         } catch (error: any) {
           console.error(

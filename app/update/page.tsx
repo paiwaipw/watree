@@ -74,7 +74,10 @@ const UpdateData = () => {
           {previousFiles.map((file: any, index: number) => {
             if (index === 0) {
               return (
-                <div className="flex flex-row justify-between items-center gap-4 my-1 shadow-md rounded-lg bg-lime-50  px-2 py-2 text-sm ">
+                <div
+                  key={`files_${index}`}
+                  className="flex flex-row justify-between items-center gap-4 my-1 shadow-md rounded-lg bg-lime-50  px-2 py-2 text-sm "
+                >
                   <div className="flex flex-row items-center gap-1">
                     <div className="text-sm">
                       Waktu unggah :{" "}
@@ -95,7 +98,10 @@ const UpdateData = () => {
               );
             } else {
               return (
-                <div className="flex flex-row justify-center items-center gap-1 my-2 ">
+                <div
+                  key={`files_${index}`}
+                  className="flex flex-row justify-center items-center gap-1 my-2 "
+                >
                   <div className="text-xs">
                     Versi sebelumnya :{" "}
                     {dayjs(file.uploaded).format("DD/MM/YYYY - HH:mm:ss")}

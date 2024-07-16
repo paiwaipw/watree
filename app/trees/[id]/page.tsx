@@ -49,6 +49,19 @@ const PlotPage = ({ params }: { params: { id: string } }) => {
             <div className="text-center font-bold text-lime-950 py-2">
               Latest Data
             </div>
+            <div className="flex flex-row justify-start items-center">
+              <span className="w-24 flex shrink-0">Status</span>
+              <span className="mx-1">:</span>
+              <span className="text-sm mx-1 bg-gray-300 py-0.5 px-2 rounded-md">
+                Unknown
+              </span>
+              <span className="text-sm mx-1 bg-red-400 py-0.5 px-2 rounded-md">
+                Dead
+              </span>
+              <span className="text-sm mx-1 bg-green-400 py-0.5 px-2 rounded-md">
+                Alive
+              </span>
+            </div>
             <div className="flex flex-row justify-start">
               <span className="w-24 flex shrink-0">Latitude</span>
               <span className="mx-1">:</span>
@@ -70,12 +83,13 @@ const PlotPage = ({ params }: { params: { id: string } }) => {
               </span>
             </div>
             <div className="flex flex-row justify-start">
-              <span className="w-24 flex shrink-0">Chan </span>
+              <span className="w-24 flex shrink-0">Soil Moisture </span>
               <span className="mx-1">:</span>
               <span className=" mx-1">
                 <span className="font-semibold">
                   {treeData.progress[treeData.progress.length - 1].chan}
                 </span>{" "}
+                (MP406-VSW%)
               </span>
             </div>
             <div className="flex flex-row justify-start">
