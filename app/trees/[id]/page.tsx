@@ -11,6 +11,8 @@ import Link from "next/link";
 const PlotPage = ({ params }: { params: { id: string } }) => {
   const [loading, setLoading] = useState(false);
   const [treeData, setTreeData]: any = useState({});
+  const [treeStatus, setTreeStatus]: any = useState(false);
+
   const fetchData = async () => {
     const tree = await fetchOneTree(params.id);
     if (tree) {
@@ -22,6 +24,11 @@ const PlotPage = ({ params }: { params: { id: string } }) => {
   }, []);
   useEffect(() => {
     if (treeData) {
+      if (treeData.status === "Hidup") {
+        setTreeStatus(true);
+      } else {
+        setTreeStatus(false);
+      }
       setLoading(false);
     } else {
       setLoading(true);
@@ -51,22 +58,22 @@ const PlotPage = ({ params }: { params: { id: string } }) => {
           <div className="flex px-2 h-[20rem] w-full">
             {treeData && <SoilChart treeData={treeData} />}
           </div>
-          <div className="flex flex-col rounded-xl py-2 px-4  bg-lime-50 shadow-md hover:shadow-xl transition-all max-w-[95%] max-sm:min-w-[80%]">
+          <div className="flex flex-col rounded-xl py-2 px-4  bg-[#284A0B]/5 shadow-md hover:shadow-xl transition-all max-w-[95%] max-sm:min-w-[80%]">
             <div className="text-center font-bold text-lime-950 py-2">
               Latest Data
             </div>
             <div className="flex flex-row justify-start items-center">
               <span className="w-24 flex shrink-0">Status</span>
               <span className="mx-1">:</span>
-              <span className="text-sm mx-1 bg-gray-300 py-0.5 px-2 rounded-md">
-                Unknown
-              </span>
-              <span className="text-sm mx-1 bg-red-400 py-0.5 px-2 rounded-md">
-                Dead
-              </span>
-              <span className="text-sm mx-1 bg-green-400 py-0.5 px-2 rounded-md">
-                Alive
-              </span>
+              {treeStatus ? (
+                <span className="text-sm mx-1 bg-green-400 py-0.5 px-2 rounded-md">
+                  Alive
+                </span>
+              ) : (
+                <span className="text-sm mx-1 bg-red-400 py-0.5 px-2 rounded-md">
+                  Dead
+                </span>
+              )}
             </div>
             <div className="flex flex-row justify-start">
               <span className="w-24 flex shrink-0">Latitude</span>
