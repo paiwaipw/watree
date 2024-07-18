@@ -67,3 +67,30 @@ body {
   padding: 0 5px;
   font-size: larger;
 }
+#screen_1 {
+  background-image: url("/watree_bg.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.beige-bg {
+  background-color: #eae6e3;
+}
+.beige-col {
+  color: #eae6e3;
+}
+.lumut-bg {
+  background-color: #284a0b;
+}
+.lumut-col {
+  color: #284a0b;
+}
+.custom-marker {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background-color: white;
+  cursor: pointer;
+  border: 1px solid white;
+}

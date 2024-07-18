@@ -7,6 +7,8 @@ interface Tree {
   treeId: string;
   latitude: number;
   longitude: number;
+  spesies: string;
+  status: string;
 }
 
 const Mapbox = ({ trees }: { trees: Tree[] }) => {
@@ -33,13 +35,21 @@ const Mapbox = ({ trees }: { trees: Tree[] }) => {
         trees.forEach((tree) => {
           const popup = new mapboxgl.Popup().setHTML(`
                 <h3>${tree.treeId}</h3>
+                <h5>Spesies : ${tree.spesies}</h5>
+                <h5>Status : ${tree.status}</h5>
                 <p>Lat: ${tree.latitude}</p>
                 <p>Lng: ${tree.longitude}</p>
-                <a href="/trees/${tree.treeId}" target="_blank">See Details
+                <a href="/trees/${tree.treeId}">See Details
                 </a>
             `);
 
-          const marker = new mapboxgl.Marker()
+          // Custom marker
+          const el = document.createElement("div");
+          el.className = "custom-marker";
+          el.style.backgroundColor =
+            tree.status === "Hidup" ? "lawngreen" : "red";
+
+          const marker = new mapboxgl.Marker(el)
             .setLngLat([tree.longitude, tree.latitude] as LngLatLike)
             .setPopup(popup)
             .addTo(map.current!);

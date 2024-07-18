@@ -64,9 +64,9 @@ const UpdateData = () => {
       <Header />
       <div
         id="main"
-        className="min-h-screen flex flex-col items-center justify-center gap-5"
+        className="min-h-screen flex flex-col items-center justify-center gap-5 pt-20 lumut-col"
       >
-        <div className="mb-4 flex flex-col w-full relative text-center font-bold text-xl">
+        <div className="mb-4 flex flex-col w-full relative text-center font-bold text-lg uppercase ">
           Pembaruan data pohon melalui file
         </div>
         <div className="mb-4 bg-[rgb(247,254,230,0.5)] px-2 py-4 rounded-lg shadow-md">
@@ -124,7 +124,7 @@ const UpdateData = () => {
           encType="multipart/form-data"
         >
           <div className="mb-4 flex flex-col w-full relative">
-            <label htmlFor="file" className="mb-1">
+            <label htmlFor="file" className="mb-1 text-sm">
               Unggah dokumen (.xlsx)
             </label>
             <input

@@ -11,6 +11,7 @@
   "dependencies": {
     "@firebase/firestore": "^4.6.4",
     "@google-cloud/storage": "^7.11.2",
+    "@next/font": "^14.2.5",
     "csv-parser": "^3.0.0",
     "date-fns": "^3.6.0",
     "dayjs": "^1.11.11",

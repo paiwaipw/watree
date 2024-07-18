@@ -13,7 +13,6 @@ const PlotPage = ({ params }: { params: { id: string } }) => {
   const fetchData = async () => {
     const tree = await fetchOneTree(params.id);
     if (tree) {
-      console.log(tree);
       setTreeData(tree);
     }
   };

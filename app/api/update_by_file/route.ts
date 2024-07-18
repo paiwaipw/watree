@@ -52,7 +52,7 @@ const validateRow = (row: any) => {
     }
     // const parsedDate = parse(date, "d/MM/yyyy", new Date());
     if (!isValid(parsedDate)) {
-      console.log(`Invalid Date: ${date}`);
+      // console.log(`Invalid Date: ${date}`);
       return null;
     }
     // Handle Time value
@@ -135,11 +135,19 @@ export const POST = async (req: NextRequest) => {
       if (treeDoc.exists()) {
         treeProgress = treeDoc.data().progress || [];
       }
-      const { Latitude: latitude, Longitude: longitude } = rows[0];
-      if (!latitude || !longitude) {
-        return new Response("Sesuaikan Data Latitude dan Logitude!", {
-          status: 400,
-        });
+      const {
+        Latitude: latitude,
+        Longitude: longitude,
+        Spesies: spesies,
+        Status: status,
+      } = rows[0];
+      if (!latitude || !longitude || !spesies || !status) {
+        return new Response(
+          "Harus terdapat kolom Latitude, Longitude, Spesies, dan Status pada baris pertama setiap sheet",
+          {
+            status: 400,
+          }
+        );
       }
 
       for (const row of rows) {
@@ -158,17 +166,24 @@ export const POST = async (req: NextRequest) => {
               treeProgress[existingEntryIndex] = validatedRow;
             }
           } else {
-            console.log(`Row validation failed in sheet ${sheetName}:`, row);
+            // console.log(`Row validation failed in sheet ${sheetName}:`, row);
           }
         } catch (error: any) {
-          console.error(
-            `Error processing row in sheet ${sheetName}: ${error.message}`
-          );
+          // console.error(
+          //   `Error processing row in sheet ${sheetName}: ${error.message}`
+          // );
         }
       }
       await setDoc(
         treeDocRef,
-        { treeId, progress: treeProgress, latitude, longitude },
+        {
+          treeId,
+          progress: treeProgress,
+          latitude,
+          longitude,
+          spesies,
+          status,
+        },
         { merge: true }
       );
     }
@@ -197,7 +212,7 @@ export const POST = async (req: NextRequest) => {
 
     return new Response("Sukses mengupdate data pohon", { status: 200 });
   } catch (error) {
-    console.error("Error processing XLSX file:", error);
+    // console.error("Error processing XLSX file:", error);
     return new Response("Internal Server Error", { status: 500 });
   }
 };
