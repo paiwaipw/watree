@@ -6,6 +6,7 @@ import Loading from "@/app/loading";
 import React, { useEffect, useState } from "react";
 import { FlowrateChart, SoilChart } from "./LineChart";
 import dayjs from "dayjs";
+import Link from "next/link";
 
 const PlotPage = ({ params }: { params: { id: string } }) => {
   const [loading, setLoading] = useState(false);
@@ -37,6 +38,12 @@ const PlotPage = ({ params }: { params: { id: string } }) => {
           id="main"
           className="min-h-screen flex flex-col items-center justify-center gap-5 pt-24 pb-10"
         >
+          <Link
+            href={"/"}
+            className="self-start ms-5 font-medium text-md rounded-md bg-[#284A0B] transition-all text-white py-1 px-4 hover:bg-[#284A0B]/80 focus:ring focus:ring-[#284A0B]/30 focus:bg-[#284A0B]/10 focus:text-[#284A0B] "
+          >
+            Back
+          </Link>
           <div className="font-bold">Data for {params.id}</div>
           <div className="flex px-2 h-[20rem] w-full">
             {treeData && <FlowrateChart treeData={treeData} />}

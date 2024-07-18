@@ -47,7 +47,10 @@ const HomePage = () => {
             HUTAN TERLINDUNGI
           </div>
         </div>
-        <div className="flex flex-col px-4 gap-10 sm:text-center text-justify justify-center items-center h-[60vh] lumut-col">
+        <div
+          id="about"
+          className="flex flex-col px-4 gap-10 sm:text-center text-justify justify-center items-center h-[60vh] lumut-col"
+        >
           <div className="text-center font-bold text-lg tracking-wide uppercase">
             Tentang Kami
           </div>
@@ -65,7 +68,10 @@ const HomePage = () => {
             Selengkapnya
           </Link>
         </div>
-        <div className="flex flex-col px-4 gap-4 text-center justify-center items-center h-[50vh] bg-[#284A0B]/5 w-full ">
+        <div
+          id="metodologi"
+          className="flex flex-col px-4 gap-4 text-center justify-center items-center h-[50vh] bg-[#284A0B]/5 w-full "
+        >
           <div className="text-center font-bold text-lg tracking-wide uppercase lumut-col mb-3">
             Metodologi
           </div>
@@ -86,12 +92,15 @@ const HomePage = () => {
         >
           Update Data
         </Link>
-        <div className="w-full flex flex-col justify-center items-center gap-10 py-10">
+        <div
+          id="mapbox"
+          className="w-full flex flex-col justify-center items-center gap-10 py-10"
+        >
           <div className="text-center font-bold text-md tracking-wide uppercase lumut-col">
             <div>Area Pengamatan </div>
             <div>Pohon Terintragasi Sistem WATREE</div>
           </div>
-          <div className="w-[95%] sm:w-[60%] h-[15rem] sm:h-[22rem]">
+          <div className="w-[95%] sm:w-[60%] h-[15rem] sm:h-[22rem] shadow-lg rounded-lg overflow-hidden">
             <Mapbox trees={treesData} />
           </div>
           <div className="flex flex-col items-center justify-center lumut-col">

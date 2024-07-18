@@ -1,12 +1,19 @@
 import React from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import Link from "next/link";
 
 const About = () => {
   return (
     <>
       <Header />
       <div id="main" className="min-h-screen flex pt-20 flex-col items-center">
+        <Link
+          href={"/"}
+          className="self-start ms-5 mt-10 font-medium text-md rounded-md bg-[#284A0B] transition-all text-white py-1 px-4 hover:bg-[#284A0B]/80 focus:ring focus:ring-[#284A0B]/30 focus:bg-[#284A0B]/10 focus:text-[#284A0B] "
+        >
+          Back
+        </Link>
         <div className="flex flex-col w-full min-h-screen gap-5 sm:gap-10 pb-10">
           <div className="mt-10 mb- text-center font-bold uppercase text-lg lumut-col">
             Tim WaTree
