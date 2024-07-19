@@ -11,7 +11,6 @@ import Link from "next/link";
 const PlotPage = ({ params }: { params: { id: string } }) => {
   const [loading, setLoading] = useState(false);
   const [treeData, setTreeData]: any = useState({});
-  const [treeStatus, setTreeStatus]: any = useState(false);
 
   const fetchData = async () => {
     const tree = await fetchOneTree(params.id);
@@ -24,11 +23,6 @@ const PlotPage = ({ params }: { params: { id: string } }) => {
   }, []);
   useEffect(() => {
     if (treeData) {
-      if (treeData.status === "Hidup") {
-        setTreeStatus(true);
-      } else {
-        setTreeStatus(false);
-      }
       setLoading(false);
     } else {
       setLoading(true);
@@ -49,29 +43,41 @@ const PlotPage = ({ params }: { params: { id: string } }) => {
             href={"/"}
             className="self-start ms-5 font-medium text-md rounded-md bg-[#284A0B] transition-all text-white py-1 px-4 hover:bg-[#284A0B]/80 focus:ring focus:ring-[#284A0B]/30 focus:bg-[#284A0B]/10 focus:text-[#284A0B] "
           >
-            Back
+            Kembali
           </Link>
-          <div className="font-bold">Data for {params.id}</div>
+          <div className="text-center">
+            <div className="font-bold">Data untuk {params.id}</div>
+            <div className="font-semibold">
+              <span className="italic">{treeData.spesies_latin}</span> (
+              {treeData.spesies_lokal})
+            </div>
+          </div>
           <div className="flex px-2 h-[20rem] w-full">
             {treeData && <FlowrateChart treeData={treeData} />}
           </div>
-          <div className="flex px-2 h-[20rem] w-full">
+          {/* <div className="flex px-2 h-[20rem] w-full">
             {treeData && <SoilChart treeData={treeData} />}
-          </div>
+          </div> */}
           <div className="flex flex-col rounded-xl py-2 px-4  bg-[#284A0B]/5 shadow-md hover:shadow-xl transition-all max-w-[95%] max-sm:min-w-[80%]">
             <div className="text-center font-bold text-lime-950 py-2">
-              Latest Data
+              Detail Data Terbaru
             </div>
             <div className="flex flex-row justify-start items-center">
               <span className="w-24 flex shrink-0">Status</span>
               <span className="mx-1">:</span>
-              {treeStatus ? (
+              {treeData.status === "Hidup" && (
                 <span className="text-sm mx-1 bg-green-400 py-0.5 px-2 rounded-md">
-                  Alive
+                  Hidup
                 </span>
-              ) : (
+              )}
+              {treeData.status === "Kritis" && (
+                <span className="text-sm mx-1 bg-yellow-400 py-0.5 px-2 rounded-md">
+                  Kritis
+                </span>
+              )}
+              {treeData.status === "Mati" && (
                 <span className="text-sm mx-1 bg-red-400 py-0.5 px-2 rounded-md">
-                  Dead
+                  Mati
                 </span>
               )}
             </div>
@@ -96,17 +102,7 @@ const PlotPage = ({ params }: { params: { id: string } }) => {
               </span>
             </div>
             <div className="flex flex-row justify-start">
-              <span className="w-24 flex shrink-0">Soil Moisture </span>
-              <span className="mx-1">:</span>
-              <span className=" mx-1">
-                <span className="font-semibold">
-                  {treeData.progress[treeData.progress.length - 1].chan}
-                </span>{" "}
-                (MP406-VSW%)
-              </span>
-            </div>
-            <div className="flex flex-row justify-start">
-              <span className="w-24 flex shrink-0">Date </span>
+              <span className="w-24 flex shrink-0">Tanggal </span>
               <span className="mx-1">:</span>
               <span className=" mx-1">
                 {dayjs(
@@ -117,7 +113,7 @@ const PlotPage = ({ params }: { params: { id: string } }) => {
               </span>
             </div>
             <div className="flex flex-row justify-start">
-              <span className="w-24 flex shrink-0">Time </span>
+              <span className="w-24 flex shrink-0">Waktu </span>
               <span className="mx-1">:</span>
               <span className=" mx-1">
                 {dayjs(
@@ -129,7 +125,7 @@ const PlotPage = ({ params }: { params: { id: string } }) => {
             </div>
 
             <div className="flex flex-row justify-start">
-              <span className="w-24 flex shrink-0">Additional Information</span>
+              <span className="w-24 flex shrink-0">Informasi Tambahan</span>
               <span className="mx-1">:</span>
               <span className=" mx-1">-</span>
             </div>

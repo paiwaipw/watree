@@ -52,13 +52,13 @@ const Header = () => {
     >
       <Link href={"/"} className="flex flex-row items-center gap-0.5">
         <img
-          src="/trees.svg"
+          src="/watree.png"
           className={`transition-all duration-300 ${
             isScrolled ? "w-6" : "w-10"
           }`}
           alt=""
         />
-        <div className="leading-10">WaTree</div>
+        <div className="ps-2 leading-10">WaTree</div>
       </Link>
       {isHomePage && (
         <>

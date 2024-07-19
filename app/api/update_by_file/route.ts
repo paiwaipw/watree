@@ -138,12 +138,28 @@ export const POST = async (req: NextRequest) => {
       const {
         Latitude: latitude,
         Longitude: longitude,
-        Spesies: spesies,
+        Spesies_latin: spesies_latin,
+        Spesies_lokal: spesies_lokal,
         Status: status,
       } = rows[0];
-      if (!latitude || !longitude || !spesies || !status) {
+      if (
+        !latitude ||
+        !longitude ||
+        !spesies_latin ||
+        !spesies_lokal ||
+        !status
+      ) {
         return new Response(
-          "Harus terdapat kolom Latitude, Longitude, Spesies, dan Status pada baris pertama setiap sheet",
+          "Harus terdapat kolom Latitude, Longitude, Spesies_latin, Spesies_lokal, dan Status pada baris pertama setiap sheet",
+          {
+            status: 400,
+          }
+        );
+      }
+      const all_tree_status = ["Hidup", "Kritis", "Mati"];
+      if (!all_tree_status.includes(status)) {
+        return new Response(
+          "Status pohon harus antara Hidup, Kritis, atau Mati",
           {
             status: 400,
           }
@@ -181,7 +197,8 @@ export const POST = async (req: NextRequest) => {
           progress: treeProgress,
           latitude,
           longitude,
-          spesies,
+          spesies_latin,
+          spesies_lokal,
           status,
         },
         { merge: true }

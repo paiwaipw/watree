@@ -86,12 +86,12 @@ const HomePage = () => {
             <img src="/trees.svg" className="w-12 sm:w-20" alt="" />
           </div>
         </div>
-        <Link
+        {/* <Link
           href={"/update"}
           className="text-center font-medium text-md rounded-md bg-[#284A0B] transition-all text-white py-1 px-4 hover:bg-[#284A0B]/80 focus:ring focus:ring-[#284A0B]/30 focus:bg-[#284A0B]/10 focus:text-[#284A0B] mt-10"
         >
           Update Data
-        </Link>
+        </Link> */}
         <div
           id="mapbox"
           className="w-full flex flex-col justify-center items-center gap-10 py-10"
