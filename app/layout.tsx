@@ -6,8 +6,15 @@ import { Toaster } from "sonner";
 const montserrat = Montserrat({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Watree",
+  title: "WaTree",
   description: "Web application for monitoring trees life",
+  keywords: "watree, watree id, watreeid",
+  openGraph: {
+    title: "WaTree",
+    description: "Web application for monitoring trees life",
+    url: "https://watree.id/",
+    images: "https://watree.id/watree.png",
+  },
 };
 
 export default function RootLayout({
