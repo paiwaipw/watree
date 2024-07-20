@@ -6,6 +6,7 @@ import Link from "next/link";
 import Mapbox from "./components/Mapbox";
 import { fetchAllTrees } from "./components/FetchTree";
 import Loading from "./loading";
+import Methods from "./components/Methods";
 
 const HomePage = () => {
   const [loading, setLoading] = useState(true);
@@ -70,21 +71,9 @@ const HomePage = () => {
         </div>
         <div
           id="metodologi"
-          className="flex flex-col px-4 gap-4 text-center justify-center items-center h-[50vh] bg-[#284A0B]/5 w-full "
+          className="flex flex-col px-4 py-10 gap-4 text-center items-center min-h-[50vh] bg-[#284A0B]/5 w-full "
         >
-          <div className="text-center font-bold text-lg tracking-wide uppercase lumut-col mb-3">
-            Metodologi
-          </div>
-          <div className="flex flex-row flex-wrap items-center justify-center gap-4 sm:gap-5">
-            <img src="/trees.svg" className="w-12 sm:w-20" alt="" />
-            <img src="/trees.svg" className="w-12 sm:w-20" alt="" />
-            <img src="/trees.svg" className="w-12 sm:w-20" alt="" />
-            <img src="/trees.svg" className="w-12 sm:w-20" alt="" />
-            <img src="/trees.svg" className="w-12 sm:w-20" alt="" />
-            <img src="/trees.svg" className="w-12 sm:w-20" alt="" />
-            <img src="/trees.svg" className="w-12 sm:w-20" alt="" />
-            <img src="/trees.svg" className="w-12 sm:w-20" alt="" />
-          </div>
+          <Methods />
         </div>
         {/* <Link
           href={"/update"}
